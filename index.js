@@ -23,6 +23,7 @@ class Queue extends EventEmitter{
         }else{
             const oldItem = this._currentItem;
             this._currentItem = item;
+            if(oldItem && this.loopAll) this.addItems(this.size, oldItem);
             this.emit("currentItemChange", oldItem, item);
         }
     }
@@ -88,7 +89,7 @@ class Queue extends EventEmitter{
      */
     addItems(index, ...items){
         if(typeof index !== "number") throw new Error("Index must be a number");
-        if((this.size + items.length) > this.maxLimit) return false;
+        if(this.maxLimit && (this.size + items.length) > this.maxLimit) return false;
         const copy = this.toArray();
         copy.splice(index, 0, ...items);
         this._queue = new Map(copy.entries());

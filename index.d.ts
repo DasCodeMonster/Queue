@@ -10,31 +10,36 @@ declare module "queue" {
         readonly _loopSingle:boolean;
         readonly _loopAll:boolean;
         readonly _maxLimit:number;
+        public currentItem:t;
+        public loopSingle:boolean;
+        public loopAll: boolean;
+        public maxLimit:boolean;
+        public size:number;
 
-        get currentItem():t;
-        set currentItem(item:t):void;
+        // get currentItem():t;
+        // set currentItem(item:t):void;
 
-        get loopSingle():boolean;
-        set loopSingle(boolean: boolean):void;
+        // get loopSingle():boolean;
+        // set loopSingle(boolean: boolean):void;
 
-        get loopAll():boolean;
-        set loopAll(boolean:boolean):void;
+        // get loopAll():boolean;
+        // set loopAll(boolean:boolean):void;
 
-        get maxLimit():number;
-        set maxLimit():number;
+        // get maxLimit():number;
+        // set maxLimit():number;
 
-        get size():number;
+        // get size():number;
 
-        addItems(index:number, ...items:t[]):boolean;
-        getItem(index:number):t;
-        getItem(...indexes:number[]):t[];
-        next():t;
-        skip():t;
-        removeItems(...indexes:number[]):t[];
-        moveItems(endIndex, ...indexes):t[];
-        toArray():t[];
-        shuffle():t[];
-        foreach(callback:(item:t, index:number, map:Map<number,t>)=>void):void;
+        public addItems(index:number, ...items:t[]):boolean;
+        public getItem(index:number):t;
+        public getItem(...indexes:number[]):t[];
+        public next():t;
+        public skip():t;
+        public removeItems(...indexes:number[]):t[];
+        public moveItems(endIndex, ...indexes):t[];
+        public toArray():t[];
+        public shuffle():t[];
+        public foreach(callback:(item:t, index:number, map:Map<number,t>)=>void):void;
 
         //events
         public on(event:"currentItemChange", listener: (oldItem:t, newItem:t)=>void):this;
