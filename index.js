@@ -162,4 +162,4 @@ class Queue extends EventEmitter{
     
 }
 
-module.exports = Queue;
+module.exports = {Queue};
