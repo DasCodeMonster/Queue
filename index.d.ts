@@ -23,6 +23,8 @@ declare module "queue" {
         get maxLimit():number;
         set maxLimit():number;
 
+        get size():number;
+
         addItems(index:number, ...items:t[]):boolean;
         getItem(index:number):t;
         getItem(...indexes:number[]):t[];
