@@ -1,13 +1,17 @@
 const {EventEmitter} = require("events");
 
 class Queue extends EventEmitter{
-    constructor(data){
+    constructor(data={currentItem: null, loopAll:false, loopSingle:false, maxLimit:null}){
         super();
         this._currentItem = data.currentItem || null;
         this._loopAll = data.loopAll || false;
         this._loopSingle = data.loopSingle || false;
         this._maxLimit = data.maxLimit || null;
-        this._queue = new Map(data.queue.entries());
+        if(data instanceof Queue){
+            this._queue = new Map(data.queue.entries());
+        }else{
+            this._queue = new Map();
+        }
     }
     get currentItem(){
         return this._currentItem;
@@ -153,8 +157,11 @@ class Queue extends EventEmitter{
     }
     skip(){
         const copy = this.toArray();
+        if(copy.length === 1 && (this.loopAll || this.loopSingle)){
+            return this.currentItem;
+        }else if(copy.length === 0) return null;
         const current = this.currentItem;
-        this.currentItem = copy.shift();
+        this.currentItem = copy.shift() || null;
         if(this.loopAll) copy.push(current);
         this._queue = new Map(copy.entries());
         return this.currentItem;
