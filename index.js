@@ -88,10 +88,14 @@ class Queue extends EventEmitter{
      * @param  {...any} items 
      */
     addItems(index, ...items){
-        if(typeof index !== "number") throw new Error("Index must be a number");
+        if(typeof index !== "number" && index !== null) throw new Error("Index must be a number");
         if(this.maxLimit && (this.size + items.length) > this.maxLimit) return false;
         const copy = this.toArray();
-        copy.splice(index, 0, ...items);
+        if(index === null || index >= copy.length){
+            copy.push(...items);
+        }else{
+            copy.splice(index, 0, ...items);
+        }
         this._queue = new Map(copy.entries());
         this.emit("add");
         return true;
