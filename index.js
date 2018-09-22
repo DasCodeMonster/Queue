@@ -97,6 +97,7 @@ class Queue extends EventEmitter{
             copy.splice(index, 0, ...items);
         }
         this._queue = new Map(copy.entries());
+        if(!this.currentItem) this.currentItem = this.getItem(0);
         this.emit("add");
         return true;
     }
