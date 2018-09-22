@@ -96,8 +96,8 @@ class Queue extends EventEmitter{
         }else{
             copy.splice(index, 0, ...items);
         }
+        if(!this.currentItem) this.currentItem = copy.shift() || null;
         this._queue = new Map(copy.entries());
-        if(!this.currentItem) this.currentItem = this.getItem(0);
         this.emit("add");
         return true;
     }
@@ -109,6 +109,7 @@ class Queue extends EventEmitter{
             if(index >= indexes.length || index < 0) return;
             removed.push(copy.splice(index, 1));
         });
+        if(!this.currentItem) this.currentItem = copy.shift() || null;
         this._queue = new Map(copy.entries());
         this.emit("remove", removed);
         return removed;
@@ -126,7 +127,8 @@ class Queue extends EventEmitter{
             if(index >= indexes.length || index < 0) return;
             toMove = [...toMove, ...copy.splice(index, 1)];
         });
-        copy.splice(endIndex, 0, ...toMove);
+        if(!this.currentItem) copy.splice(endIndex, 0, ...toMove);
+        this.currentItem = copy.shift() || null;
         this._queue = new Map(copy.entries());
         this.emit("move", toMove);
         return toMove;
