@@ -167,7 +167,10 @@ class Queue extends EventEmitter{
         const copy = this.toArray();
         if(copy.length === 1 && (this.loopAll || this.loopSingle)){
             return this.currentItem;
-        }else if(copy.length === 0) return null;
+        }else if(copy.length === 0) {
+            this.currentItem = null;
+            return null;
+        }
         const current = this.currentItem;
         this.currentItem = copy.shift() || null;
         if(this.loopAll) copy.push(current);
