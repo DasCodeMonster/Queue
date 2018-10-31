@@ -172,9 +172,10 @@ class Queue extends EventEmitter{
             return null;
         }
         const current = this.currentItem;
-        this.currentItem = copy.shift() || null;
+        const newCurrentItem = copy.shift() || null;
         if(this.loopAll) copy.push(current);
         this._queue = new Map(copy.entries());
+        this.currentItem = newCurrentItem;
         return this.currentItem;
     }
     
