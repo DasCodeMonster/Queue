@@ -3,7 +3,7 @@ declare module "queue" {
     import {EventEmitter} from "events";
     type LoopState = {loopAll:boolean, loopSingle:boolean};
     export class Queue<t> extends EventEmitter {
-        constructor(data: Queue | {qeueue:t[], currentItem:t, loopSingle:boolean, loopAll:boolean, maxLimit:number});
+        constructor(data: Queue<t> | {qeueue:t[], currentItem:t, loopSingle:boolean, loopAll:boolean, maxLimit:number});
         
         readonly _queue:Map<number,t>;
         readonly _currentItem: t;
@@ -48,6 +48,6 @@ declare module "queue" {
         public on(event:"add", listener: (items:t[])=>void):this;
         public on(event:"remove", listener: (removed:t[])=>void):this;
         public on(event:"move", listener: (moved:t[])=>void):this;
-        public on(event:"shuffle", listener: (queue:Queue)=>void):this;
+        public on(event:"shuffle", listener: ()=>void):this;
     }
 }

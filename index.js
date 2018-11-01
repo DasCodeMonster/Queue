@@ -154,7 +154,7 @@ class Queue extends EventEmitter{
             copy[randomIndex] = temporaryValue;
         }
         this._queue = new Map(copy.entries());
-        this.emit("shuffle", this);
+        this.emit("shuffle");
     }
     next(){
         if(this.loopSingle){
