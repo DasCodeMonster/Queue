@@ -45,7 +45,7 @@ declare module "queue" {
         public on(event:"currentItemChange", listener: (oldItem:t, newItem:t)=>void):this;
         public on(event:"loopChange", listener: (oldLoopState:LoopState, newLoopState:LoopState)=>void):this;
         public on(event:"maxLimitChange", listener: (oldMaxLimit:number, newMaxLimit:number)=>void):this;
-        public on(event:"add", listener: ()=>void):this;
+        public on(event:"add", listener: (items:t[])=>void):this;
         public on(event:"remove", listener: (removed:t[])=>void):this;
         public on(event:"move", listener: (moved:t[])=>void):this;
         public on(event:"shuffle", listener: (queue:Queue)=>void):this;

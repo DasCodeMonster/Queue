@@ -98,7 +98,7 @@ class Queue extends EventEmitter{
         }
         if(!this.currentItem) this.currentItem = copy.shift() || null;
         this._queue = new Map(copy.entries());
-        this.emit("add");
+        this.emit("add", items);
         return true;
     }
     removeItems(...indexes){
