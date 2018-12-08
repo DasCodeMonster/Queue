@@ -106,7 +106,7 @@ class Queue extends EventEmitter{
         const removed = [];
         indexes.forEach(index=>{
             if(typeof index !== "number") throw new Error("Index must be a number");
-            if(index >= indexes.length || index < 0) return;
+            if(index >= copy.length || index < 0) return;
             removed.push(copy.splice(index, 1));
         });
         if(!this.currentItem) this.currentItem = copy.shift() || null;
