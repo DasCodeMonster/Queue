@@ -107,7 +107,7 @@ class Queue extends EventEmitter{
         indexes.forEach(index=>{
             if(typeof index !== "number") throw new Error("Index must be a number");
             if(index >= copy.length || index < 0) return;
-            removed.push(copy.splice(index, 1));
+            removed.push(copy.splice(index, 1)[0]);
         });
         if(!this.currentItem) this.currentItem = copy.shift() || null;
         this._queue = new Map(copy.entries());
