@@ -13,6 +13,14 @@ class Queue extends EventEmitter{
             this._queue = new Map();
         }
     }
+    /**
+     * @override
+     */
+    emit(type, ...args){
+        super.emit(type, ...args);
+        super.emit("*", type, ...args);
+        return this;
+    }
     get currentItem(){
         return this._currentItem;
     }

@@ -49,5 +49,6 @@ declare module "queue" {
         public on(event:"remove", listener: (removed:t[])=>void):this;
         public on(event:"move", listener: (moved:t[])=>void):this;
         public on(event:"shuffle", listener: ()=>void):this;
+        public on(event:"*", listener: (type:string|number, args:any)=>void):this;
     }
 }
